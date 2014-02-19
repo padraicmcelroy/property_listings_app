@@ -1,1 +1,3 @@
-test file 1
+Property Listings site (PHP/MySQL College Assignment)
+
+This is a cloud-based property listing website with a front end and an admin back end. It is hosted at http://www.padraicmcelroy.com/dsa/php/index.php The front end shows a listing of all properties available for sale. The user can filter the listing based on county, price and house type. Front end filters reload data using JSON and Ajax. The admin section is protected by a login. Within the admin section you can add, update and delete properties for sale. Each listing has a photograph uploaded.
