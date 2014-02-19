@@ -1,0 +1,125 @@
+f
+<?php if (isset($flashMessage) && strlen(trim($flashMessage)) > 0 ) : ?>
+
+<!-- To display a message to the user -->
+<div class="alert">
+    <button type="button" class="close" data-dismiss="alert">�</button>
+    <strong>Message</strong>
+    <?php echo $flashMessage ?>
+</div>
+
+<?php endif;  ?>
+
+<!--create a form with all the fields you need to update. Ensure it is 'multipart.form-data' for the image upload. -->
+<form class="form-horizontal" method="post" action="insert.php" enctype="multipart/form-data" >
+    <input type="hidden" name="property_id"
+           value="<?php echo $property['property_id']; ?>" />
+
+    <div class="control-group">
+        <label class="control-label" for="inputPropertyType">House Type</label>
+        <div class="controls">
+            <!--Select box for House Type -->
+            <?php 
+            $records = properties_get_all();
+
+            $arrayItems=array();
+
+            $count = sizeof($records);
+            for($i=0; $i < $count; $i++) {
+
+            $arrayItems[$i]["label"]=$records[$i]['house_type'];
+            $arrayItems[$i]["id"]=$records[$i]['housetype_id'];
+
+
+            }
+
+            echo uihelperSelect('_housetype_id',$arrayItems,$property['_housetype_id']) ?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="inputCounty">County</label>
+        <div class="controls">
+            <!--Select box for Counties -->
+            <?php 
+            $records = counties_get_all();
+
+            $arrayItems=array();
+
+            $count = sizeof($records);
+            for($i=0; $i < $count; $i++) {
+
+            $arrayItems[$i]["label"]=$records[$i]['county'];
+            $arrayItems[$i]["id"]=$records[$i]['county_id'];
+
+            }
+
+            echo uihelperSelect('_county_id',$arrayItems,$property['_county_id']) ?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="inputAddress">Address</label>
+        <div class="controls">
+            <input type="text" id="inputAddress" name="address1"
+                   placeholder="Address" value="<?php echo $property['address1']; ?>">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="price">Price</label>
+        <div class="controls">
+            <input type="text" id="price" name="price" placeholder="Price" value="<?php echo $property['price']; ?>">
+        </div>
+    </div>
+
+
+    <div class="control-group">
+        <label class="control-label" for="inputPriceRange">Price Range</label>
+        <div class="controls">
+            <!--Call on the prices_get_all function in functions page. -->
+            <?php 
+            $records = prices_get_all();
+
+            $arrayItems=array();
+
+            $count = sizeof($records);
+            for($i=0; $i < $count; $i++) {
+
+            $arrayItems[$i]["label"]=$records[$i]['pricebracket'];
+            $arrayItems[$i]["id"]=$records[$i]['houseprice_id'];
+            }
+
+            echo uihelperSelect('_houseprice_id',$arrayItems,$property['_houseprice_id']) ?>       
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="salestatus">Sale Status</label>
+        <div class="controls">
+            <input type="text" id="salestatus" name="salestatus" placeholder="Sale Status" value="<?php echo $property['salestatus']; ?>">
+        </div>
+    </div>
+
+
+    <div class="control-group">
+        <label class="control-label" for="inputPropertyImage">Upload Image</label>
+
+        <div class="controls">
+
+            <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+            <input name="uploadedfile" type="file" />
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+
+            <button type="submit" class="btn">
+                <?php echo $buttonLabel ?>
+            </button>
+        </div>
+    </div>
+</form>
+
+
